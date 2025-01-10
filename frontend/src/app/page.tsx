@@ -17,9 +17,13 @@ export default function Home() {
     const newTxtAreaVal = event.target.value;
     const emoji = new EmojiConvertor();
 
-    const newLineFormatted = newTxtAreaVal.replaceAll("\n", "  \n‎");
-    const newMdVal = emoji.replace_colons(newLineFormatted);
-    // console.log(newMdVal);
+    const formattedText = newTxtAreaVal
+      .split("\n")
+      .map((line) => (line.trim() !== "" ? line + "  " : "‎  "))
+      .join("\n");
+
+    const newMdVal = emoji.replace_colons(formattedText);
+    console.log(newMdVal);
 
     setTxtAreaVal(newTxtAreaVal);
     setMdVal(newMdVal);
