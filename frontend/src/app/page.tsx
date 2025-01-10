@@ -6,6 +6,7 @@ import { Textarea } from "@/components/ui/textarea";
 import Markdown from "marked-react";
 import { useState } from "react";
 import { EmojiConvertor } from "emoji-js";
+import "./md-preview.css";
 
 export default function Home() {
   const [txtAreaVal, setTxtAreaVal] = useState("");
@@ -64,7 +65,7 @@ export default function Home() {
         </Button>
       </section>
       <section className="flex flex-col w-1/2 gap-2">
-        <div className="flex flex-col h-full border px-3 py-2 bg-[#2B2D31] text-white overflow-scroll">
+        <div className="flex flex-col h-full border px-3 py-2 bg-[#2B2D31] text-white overflow-scroll md-preview">
           <Markdown value={mdVal}></Markdown>
         </div>
         <DateTimePicker></DateTimePicker>
