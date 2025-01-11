@@ -11,6 +11,7 @@ import { MarkdownPreview } from "@/components/ui/MarkdownPreview";
 export default function Home() {
   const [txtAreaVal, setTxtAreaVal] = useState("");
   const [selectedFiles, setSelectedFiles] = useState<FileList | null>(null);
+  const [dateTimeVal, setDateTimeVal] = useState("");
 
   const handleTextChange = (
     event: React.ChangeEvent<HTMLTextAreaElement>
@@ -34,7 +35,16 @@ export default function Home() {
     console.log("Making request.");
 
     const formData = new FormData();
+    if (!txtAreaVal.trim()) {
+      alert("Message cannot be empty.");
+      return;
+    }
     formData.append("message", txtAreaVal);
+    if (!dateTimeVal) {
+      alert("Please select a date and time.");
+      return;
+    }
+    formData.append("dateTime", dateTimeVal);
 
     if (selectedFiles) {
       Array.from(selectedFiles).forEach((file) => {
@@ -43,13 +53,17 @@ export default function Home() {
     }
 
     try {
-      await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/send-message`, {
+      await fetch("/send-message", {
         method: "POST",
         body: formData,
       });
     } catch (err) {
       alert(err);
     }
+  };
+
+  const handleDateSelect = async (date: Date) => {
+    setDateTimeVal(date.toISOString());
   };
 
   return (
@@ -59,6 +73,8 @@ export default function Home() {
           className="resize-none text-base md:text-base h-full"
           value={txtAreaVal}
           onChange={handleTextChange}
+          placeholder="Enter your message here."
+          name="raw-message"
         ></Textarea>
         <Input
           type="file"
