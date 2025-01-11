@@ -25,7 +25,6 @@ export default function Home() {
       .join("\n");
 
     const newMdVal = emoji.replace_colons(formattedText);
-    console.log(newMdVal);
 
     setTxtAreaVal(newTxtAreaVal);
     setMdVal(newMdVal);
@@ -46,19 +45,17 @@ export default function Home() {
       message: txtAreaVal,
     };
 
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BACKEND_URL}/send-message`,
-      {
+    try {
+      await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/send-message`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(data),
-      }
-    );
-
-    const json = await response.json();
-    console.log(json);
+      });
+    } catch (err) {
+      alert(err);
+    }
   };
 
   return (
