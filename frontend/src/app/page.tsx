@@ -7,6 +7,7 @@ import Markdown from "marked-react";
 import { useState } from "react";
 import { EmojiConvertor } from "emoji-js";
 import "./md-preview.css";
+import { Input } from "@/components/ui/input";
 
 export default function Home() {
   const [txtAreaVal, setTxtAreaVal] = useState("");
@@ -28,6 +29,14 @@ export default function Home() {
 
     setTxtAreaVal(newTxtAreaVal);
     setMdVal(newMdVal);
+  };
+
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const files = event.target.files;
+    if (files && files.length > 10) {
+      alert("You can only upload a maximum of 10 files.");
+      event.target.value = "";
+    }
   };
 
   const sendMessage = async () => {
@@ -60,6 +69,12 @@ export default function Home() {
           value={txtAreaVal}
           onChange={handleTextChange}
         ></Textarea>
+        <Input
+          type="file"
+          accept=".png, .jpeg, .jpg"
+          multiple
+          onChange={handleFileChange}
+        />
         <Button className="w-full" onClick={sendMessage}>
           Send message
         </Button>
