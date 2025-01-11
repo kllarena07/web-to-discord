@@ -24,14 +24,21 @@ def send_message():
 
     message_content = data['message']
 
-    async def send_discord_message():
+    async def send_discord_message(message_content):
         channel = client.get_channel(CHANNEL_ID)
         if channel:
+            safa_role = discord.utils.get(channel.guild.roles, name="SAFA so good!")
+            umd_role = discord.utils.get(channel.guild.roles, name="UM-Dearborn")
+
+            if safa_role:
+                message_content = message_content.replace("@SAFA so good!", safa_role.mention)
+            if umd_role:
+                message_content = message_content.replace("@UM-Dearborn", umd_role.mention)
+
             await channel.send(message_content)
 
-    client.loop.create_task(send_discord_message())
+    client.loop.create_task(send_discord_message(message_content))
     return jsonify({'status': 'Message is being sent'}), 200
-
 
 def run_flask():
     app.run(host='127.0.0.1', port=5000)
