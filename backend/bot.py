@@ -7,7 +7,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 BOT_TOKEN = getenv("DISCORD_BOT_TOKEN")
-CHANNEL_ID = 1116032082985091105
+CHANNEL_ID = getenv("TARGET_CHANNEL_ID")
 
 intents = discord.Intents.default()
 client = discord.Client(intents=intents)
