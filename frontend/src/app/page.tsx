@@ -53,10 +53,12 @@ export default function Home() {
     }
 
     try {
-      await fetch("/send-message", {
+      const response = await fetch("/send-message", {
         method: "POST",
         body: formData,
       });
+      const text = await response.text();
+      console.log(text);
     } catch (err) {
       alert(err);
     }
