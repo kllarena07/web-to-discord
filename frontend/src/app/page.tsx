@@ -3,32 +3,21 @@
 import { Button } from "@/components/ui/button";
 import { DateTimePicker } from "@/components/ui/DateTimePicker";
 import { Textarea } from "@/components/ui/textarea";
-import Markdown from "marked-react";
 import { useState } from "react";
-import { EmojiConvertor } from "emoji-js";
 import "./md-preview.css";
 import { Input } from "@/components/ui/input";
+import { MarkdownPreview } from "@/components/ui/MarkdownPreview";
 
 export default function Home() {
   const [txtAreaVal, setTxtAreaVal] = useState("");
-  const [mdVal, setMdVal] = useState("");
   const [selectedFiles, setSelectedFiles] = useState<FileList | null>(null);
 
   const handleTextChange = (
     event: React.ChangeEvent<HTMLTextAreaElement>
   ): void => {
     const newTxtAreaVal = event.target.value;
-    const emoji = new EmojiConvertor();
-
-    const formattedText = newTxtAreaVal
-      .split("\n")
-      .map((line) => (line.trim() !== "" ? line + "  " : "‎  "))
-      .join("\n");
-
-    const newMdVal = emoji.replace_colons(formattedText);
 
     setTxtAreaVal(newTxtAreaVal);
-    setMdVal(newMdVal);
   };
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -82,10 +71,8 @@ export default function Home() {
         </Button>
       </section>
       <section className="flex flex-col w-1/2 gap-2">
-        <div className="flex flex-col h-full border px-3 py-2 bg-[#2B2D31] text-white overflow-scroll md-preview">
-          <Markdown value={mdVal}></Markdown>
-        </div>
-        <DateTimePicker></DateTimePicker>
+        <MarkdownPreview value={txtAreaVal} />
+        <DateTimePicker onDateChange={handleDateSelect}></DateTimePicker>
       </section>
     </section>
   );
