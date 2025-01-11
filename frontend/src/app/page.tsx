@@ -12,6 +12,7 @@ import { Input } from "@/components/ui/input";
 export default function Home() {
   const [txtAreaVal, setTxtAreaVal] = useState("");
   const [mdVal, setMdVal] = useState("");
+  const [selectedFiles, setSelectedFiles] = useState<FileList | null>(null);
 
   const handleTextChange = (
     event: React.ChangeEvent<HTMLTextAreaElement>
@@ -35,23 +36,27 @@ export default function Home() {
     if (files && files.length > 10) {
       alert("You can only upload a maximum of 10 files.");
       event.target.value = "";
+    } else {
+      setSelectedFiles(files);
     }
   };
 
   const sendMessage = async () => {
     console.log("Making request.");
 
-    const data = {
-      message: txtAreaVal,
-    };
+    const formData = new FormData();
+    formData.append("message", txtAreaVal);
+
+    if (selectedFiles) {
+      Array.from(selectedFiles).forEach((file) => {
+        formData.append("files", file);
+      });
+    }
 
     try {
       await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/send-message`, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
+        body: formData,
       });
     } catch (err) {
       alert(err);
