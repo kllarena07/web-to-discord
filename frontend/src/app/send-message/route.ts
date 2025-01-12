@@ -33,13 +33,12 @@ export async function POST(request: Request) {
 
   try {
     for (const [key, value] of entries) {
-      if (key === "Files" && value instanceof File) {
+      if (key === "files" && value instanceof File) {
         const file = value;
         const uploadParams = {
           Bucket: S3_BUCKET_NAME,
           Key: file.name,
           Body: Buffer.from(await file.arrayBuffer()),
-          ContentType: file.type,
         };
 
         await s3Client.send(new PutObjectCommand(uploadParams));
