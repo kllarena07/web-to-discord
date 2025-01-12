@@ -1,29 +1,6 @@
 import { PutObjectCommand, S3Client } from "@aws-sdk/client-s3";
 import { NextResponse } from "next/server";
-
-type MessageRequest = {
-  message: string;
-  dateTime: string;
-  files: File[];
-};
-
-const fdToMessageReq = (formData: FormData): MessageRequest => {
-  const message = formData.get("message") as string;
-  const dateTime = formData.get("dateTime") as string;
-  const files: File[] = [];
-
-  formData.getAll("files").forEach((file) => {
-    if (file instanceof File) {
-      files.push(file);
-    }
-  });
-
-  return {
-    message,
-    dateTime,
-    files,
-  };
-};
+import { fdToMessageReq } from "./helpers";
 
 export async function POST(request: Request) {
   const AWS_REGION = process.env.AWS_REGION;
