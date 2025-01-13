@@ -34,6 +34,8 @@ const TARGET_LAMBDA_ARN = process.env.TARGET_LAMBDA_ARN!;
 const SCHEDULER_ACCESS_KEY_ID = process.env.SCHEDULER_ACCESS_KEY_ID!;
 const SCHEDULER_SECRET_ACCESS_KEY = process.env.SCHEDULER_SECRET_ACCESS_KEY!;
 const ROLE_ARN = process.env.ROLE_ARN!;
+const SAFA_SO_GOOD = process.env.SAFA_SO_GOOD;
+const UM_DEARBORN = process.env.UM_DEARBORN;
 
 const schedulerClient = new SchedulerClient({
   region: AWS_REGION,
@@ -64,7 +66,7 @@ export const scheduleLambdaInvocation = async (input: {
       Arn: TARGET_LAMBDA_ARN,
       RoleArn: ROLE_ARN,
       Input: JSON.stringify({
-        message,
+        message: `<@&${SAFA_SO_GOOD}> <@&${UM_DEARBORN}>\n\n${message}`,
         attachmentURLs,
       }),
     },
