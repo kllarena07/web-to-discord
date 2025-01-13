@@ -82,6 +82,17 @@ export default function Home() {
           placeholder="Enter your message here."
           name="raw-message"
         ></Textarea>
+        <p>
+          Discord uses Markdown to render it&apos;s messages.{" "}
+          <a
+            className="underline text-blue-700"
+            href="https://www.markdownguide.org/cheat-sheet/"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Cheatsheet
+          </a>
+        </p>
         <div className="flex items-center gap-2">
           <Input
             type="file"
