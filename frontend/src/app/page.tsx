@@ -97,7 +97,7 @@ export default function Home() {
               setSelectedFiles(null);
             }}
           >
-            Clear
+            Clear Images
           </Button>
         </div>
         <Button className="w-full" onClick={sendMessage}>
