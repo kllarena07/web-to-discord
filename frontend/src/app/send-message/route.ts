@@ -70,7 +70,7 @@ export async function POST(request: Request) {
 
   await scheduleLambdaInvocation(scheduleMetaData);
 
-  return new NextResponse("Form data received!", {
+  return new NextResponse("Scheduled message", {
     status: 200,
     headers: { "Content-Type": "text/plain" },
   });

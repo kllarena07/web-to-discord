@@ -7,6 +7,7 @@ import { useState } from "react";
 import "./md-preview.css";
 import { Input } from "@/components/ui/input";
 import { MarkdownPreview } from "@/components/ui/MarkdownPreview";
+import toast, { Toaster } from "react-hot-toast";
 
 export default function Home() {
   const [txtAreaVal, setTxtAreaVal] = useState("");
@@ -57,10 +58,12 @@ export default function Home() {
         method: "POST",
         body: formData,
       });
+
       const text = await response.text();
-      console.log(text);
+
+      toast.success(text);
     } catch (err) {
-      alert(err);
+      toast.error(err);
     }
   };
 
@@ -70,6 +73,7 @@ export default function Home() {
 
   return (
     <section className="flex p-5 gap-5 h-dvh">
+      <Toaster />
       <section className="flex flex-col text-base w-1/2 gap-2 h-full">
         <Textarea
           className="resize-none text-base md:text-base h-full"
