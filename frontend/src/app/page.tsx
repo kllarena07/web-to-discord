@@ -78,12 +78,24 @@ export default function Home() {
           placeholder="Enter your message here."
           name="raw-message"
         ></Textarea>
-        <Input
-          type="file"
-          accept=".png, .jpeg, .jpg"
-          multiple
-          onChange={handleFileChange}
-        />
+        <div className="flex items-center gap-2">
+          <Input
+            type="file"
+            accept=".png, .jpeg, .jpg"
+            multiple
+            onChange={handleFileChange}
+            ref={(input) => {
+              if (input && selectedFiles === null) input.value = "";
+            }}
+          />
+          <Button
+            onClick={() => {
+              setSelectedFiles(null);
+            }}
+          >
+            Clear
+          </Button>
+        </div>
         <Button className="w-full" onClick={sendMessage}>
           Send message
         </Button>
