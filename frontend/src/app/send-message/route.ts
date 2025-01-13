@@ -1,6 +1,6 @@
 import { PutObjectCommand, S3Client } from "@aws-sdk/client-s3";
 import { NextResponse } from "next/server";
-import { fdToMessageReq } from "./helpers";
+import { fdToMessageReq, scheduleLambdaInvocation } from "./helpers";
 
 export async function POST(request: Request) {
   const AWS_REGION = process.env.AWS_REGION;
@@ -61,6 +61,14 @@ export async function POST(request: Request) {
       headers: { "Content-Type": "text/plain" },
     });
   }
+
+  const scheduleMetaData = {
+    message: messageReq.message,
+    dateTime: messageReq.dateTime,
+    attachmentURLs: bucketedImgURLs,
+  };
+
+  await scheduleLambdaInvocation(scheduleMetaData);
 
   return new NextResponse("Form data received!", {
     status: 200,
