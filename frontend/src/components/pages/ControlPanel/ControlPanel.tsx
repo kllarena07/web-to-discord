@@ -8,6 +8,8 @@ import "./md-preview.css";
 import { Input } from "@/components/ui/input";
 import { MarkdownPreview } from "@/components/ui/MarkdownPreview";
 import toast, { Toaster } from "react-hot-toast";
+import { LogoutLink } from "@kinde-oss/kinde-auth-nextjs/components";
+import { LogOut } from "lucide-react";
 
 export default function ControlPanel() {
   const [txtAreaVal, setTxtAreaVal] = useState("");
@@ -74,6 +76,11 @@ export default function ControlPanel() {
   return (
     <section className="flex p-5 gap-5 h-dvh">
       <Toaster />
+      <Button>
+        <LogoutLink>
+          <LogOut></LogOut>
+        </LogoutLink>
+      </Button>
       <section className="flex flex-col text-base w-1/2 gap-2 h-full">
         <Textarea
           className="resize-none text-base md:text-base h-full"
