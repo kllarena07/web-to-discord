@@ -9,10 +9,10 @@ When making announcements, I found it would be helpful to have a tool where we c
 
 > Note: I use [`pnpm`](https://pnpm.io/installation) for my package manager to save disk space on my computer, please use it when working with this project.
 
-`frontend` is just basic NextJS 15 application. As such:
+The `frontend` directory is just a NextJS 15 application. As such:
 
 1. `cd frontend`
 2. `pnpm install`
 3. `pnpm run dev`
 
-Make sure to also use the necessary environment variables and store them in a `.env.local` file. DM me on Discord for the env vars.
+Make sure to also use the necessary environment variables and store them in a `.env.local` file in the root  of the `frontend` directory. DM me on Discord for the env vars.
