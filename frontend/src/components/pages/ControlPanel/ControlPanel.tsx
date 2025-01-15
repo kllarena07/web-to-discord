@@ -76,8 +76,8 @@ export default function ControlPanel() {
   return (
     <section className="flex p-5 gap-5 h-dvh">
       <Toaster />
-      <Button>
-        <LogoutLink>
+      <Button className="p-0">
+        <LogoutLink className="px-4 py-2">
           <LogOut></LogOut>
         </LogoutLink>
       </Button>
