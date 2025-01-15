@@ -8,6 +8,8 @@ I wanted to streamline this process by creating a tool that would schedule Disco
 
 Please feel free to pick up any issues.
 
+> Note: The web dashboard is purposely password locked to prohibit the public from scheduling announcements
+
 ## System architecture
 ![Screenshot 2025-01-13 at 11 04 33 PM](https://github.com/user-attachments/assets/84c72c21-d924-4429-8911-d9383774441f)
 
