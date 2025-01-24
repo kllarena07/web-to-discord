@@ -76,11 +76,18 @@ export default function ControlPanel() {
   return (
     <section className="flex p-5 gap-5 h-dvh">
       <Toaster />
-      <Button className="p-0">
-        <LogoutLink className="px-4 py-2">
-          <LogOut></LogOut>
-        </LogoutLink>
-      </Button>
+      <div className="flex flex-col">
+        <Button className="p-0">
+          <LogoutLink className="px-4 py-2">
+            <LogOut></LogOut>
+          </LogoutLink>
+        </Button>
+        <div className="mt-5">
+          <p>{2000 - txtAreaVal.length}</p>
+          <p>chars</p>
+          <p>remaining</p>
+        </div>
+      </div>
       <section className="flex flex-col text-base w-1/2 gap-2 h-full">
         <Textarea
           className="resize-none text-base md:text-base h-full"
@@ -88,7 +95,8 @@ export default function ControlPanel() {
           onChange={handleTextChange}
           placeholder="Enter your message here."
           name="raw-message"
-        ></Textarea>
+          maxLength={2000}
+        />
         <p>
           Discord uses Markdown to render it&apos;s messages.{" "}
           <a
@@ -118,7 +126,11 @@ export default function ControlPanel() {
             Clear Images
           </Button>
         </div>
-        <Button className="w-full" onClick={sendMessage}>
+        <Button
+          className="w-full"
+          onClick={sendMessage}
+          disabled={txtAreaVal.length >= 2000}
+        >
           Send message
         </Button>
       </section>
